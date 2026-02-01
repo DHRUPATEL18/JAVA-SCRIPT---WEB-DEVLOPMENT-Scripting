@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Bubbling</title>
+    <style>
+        .con {
+            background-color: crimson;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        .childcon {
+            background-color: beige;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        .child {
+            background-color: aliceblue;
+            padding: 34px;
+            margin: 34px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="con">
+        <div class="childcon">
+            <section class="child">I am a Child</section>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector(".con").addEventListener("click", (e) => {
+            e.stopPropagation();
+            alert("Container Clicked");
+        });
+        document.querySelector(".childcon").addEventListener("click", (e) => {
+            e.stopPropagation();
+            alert("Child Container Clicked");
+        });
+        document.querySelector(".child").addEventListener("click", (e) => {
+            alert("Child Clicked");
+        });
+
+        function getRandomColor() {
+            let val2 = Math.ceil(Math.random() * 255);
+            let val3 = Math.ceil(Math.random() * 255);
+            let val1 = Math.ceil(Math.random() * 255);
+
+            return `rgb(${val1}, ${val2}, ${val3})`
+        }
+
+        setInterval(() => {
+            document.querySelector(".childcon").style.backgroundColor = getRandomColor();
+        }, 1000);
+
+        // Cleare The setInterval
+        // clearInterval(1);
+
+        // It do one time only with in certain time out which is gvine in second parameter
+        setTimeout(() => {
+            document.querySelector(".con").style.backgroundColor = getRandomColor();
+        }, 5000);
+
+        // Clear the setTimeout
+        // clearTimeout(1);
+
+    </script>
+</body>
+
+</html>
